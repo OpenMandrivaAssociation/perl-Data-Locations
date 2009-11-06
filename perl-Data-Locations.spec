@@ -1,21 +1,24 @@
-%define real_name Data-Locations
+%define upstream_name    Data-Locations
+%define upstream_version 5.5
+
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
 
 Summary:	Data-Locations module for perl 
-Name:		perl-%{real_name}
-Version:	5.4
-Release:	%mkrel 6
-License:	GPL or Artistic
+License:	GPL+ or Artistic
 Group:		Development/Perl
-URL:		http://search.cpan.org/dist/%{real_name}
-Source0:	%{real_name}-%{version}.tar.bz2
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Data/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires:	perl-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module allows for "magic" insertion points in your data.
 
 %prep
-%setup -q -n %{real_name}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -35,5 +38,3 @@ rm -rf %{buildroot}
 %{perl_vendorlib}/*/Data/Locations.pm
 %{perl_vendorlib}/*/auto/Data/Locations
 %{_mandir}/*/*
-
-
